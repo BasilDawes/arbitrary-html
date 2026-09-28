@@ -1,10 +1,13 @@
-<head><title>README</title></head>
+<head>
+  <title>Persistent Notes</title>
+  <link rel="icon" href="../chaos.png">
+</head>
 <body contenteditable=true></body>
 <script>
 const body = document.body;
 
 const setTitle = () => {
-document.title = (body.innerText.split(/\r?\n/)[0] || "").trim() || "README";
+document.title = (body.innerText.split(/\r?\n/)[0] || "").trim() || "Persistent Notes";
 }
 
 /* Hope this doesn't allow XSS */
