@@ -3,12 +3,18 @@
 <script>
 const body = document.body;
 
+const setTitle = () => {
+document.title = (body.innerText.split(/\r?\n/)[0] || "").trim() || "README";
+}
+
 /* Hope this doesn't allow XSS */
 body.innerHTML = decodeURIComponent(location.search).substring(1) || "Take Notes...";
+setTitle();
 
 body.oninput = ev => {
 const url = new URL(location.href);
 url.search = encodeURIComponent(body.innerHTML);
-window.history.replaceState({}, "README", url);
+setTitle();
+window.history.replaceState({}, document.title, url);
 }
 </script>
