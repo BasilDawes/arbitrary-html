@@ -14,10 +14,17 @@ document.title = (body.innerText.split(/\r?\n/)[0] || "").trim() || "Persistent 
 body.innerHTML = decodeURIComponent(location.search).substring(1) || "Take Notes...";
 setTitle();
 
-body.oninput = ev => {
+const saveInput = () => {
 const url = new URL(location.href);
 url.search = encodeURIComponent(body.innerHTML);
 setTitle();
 window.history.replaceState({}, document.title, url);
+}
+
+let saveTimeout;
+
+body.oninput = () => {
+clearTimeout(saveTimeout);
+saveTimeout = setTimeout(saveInput, 500);
 }
 </script>
